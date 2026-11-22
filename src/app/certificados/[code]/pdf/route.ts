@@ -6,7 +6,7 @@ import { AUDIENCE_LABEL, isAudience } from "@/lib/roles";
 
 const BLUE = rgb(0.03, 0.23, 0.47);
 const INK = rgb(0.08, 0.13, 0.24);
-const dateFormat = new Intl.DateTimeFormat("es-AR", { dateStyle: "long", timeZone: "America/Argentina/Salta" });
+const dateFormat = new Intl.DateTimeFormat("es-AR", { dateStyle: "long", timeZone: "America/Argentina/Jujuy" });
 
 export async function GET(_: Request, { params }: { params: Promise<{ code: string }> }) {
   const code = decodeURIComponent((await params).code).toUpperCase();

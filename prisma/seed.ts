@@ -6,7 +6,7 @@ const db = new PrismaClient();
 const DEMO_PASSWORD = "inclusive123";
 
 const users = [
-  { name: "Lic. Ana Gómez", email: "validadora@inclusiveblue.test", role: "VALIDADOR", profession: "Psicopedagoga", license: "SA-1234" },
+  { name: "Lic. Ana Gómez", email: "validadora@inclusiveblue.test", role: "VALIDADOR", profession: "Psicopedagoga", license: "JY-1234" },
   { name: "Laura Docente", email: "docente@inclusiveblue.test", role: "DOCENTE" },
   { name: "Mateo Estudiante", email: "estudiante@inclusiveblue.test", role: "ESTUDIANTE" },
   { name: "Familia Pérez", email: "familia@inclusiveblue.test", role: "FAMILIA" },

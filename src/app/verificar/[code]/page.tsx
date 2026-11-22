@@ -6,7 +6,7 @@ import { AUDIENCE_LABEL, isAudience } from "@/lib/roles";
 
 export const metadata = { title: "Certificado" };
 
-const dateFormat = new Intl.DateTimeFormat("es-AR", { dateStyle: "long", timeZone: "America/Argentina/Salta" });
+const dateFormat = new Intl.DateTimeFormat("es-AR", { dateStyle: "long", timeZone: "America/Argentina/Jujuy" });
 
 export default async function CertificatePage({
   params,
