@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+:root {
+  --ib-blue: #0b4fa3;
+  --ib-blue-dark: #083a78;
+  --ib-blue-soft: #e8f1fc;
+  --ib-ink: #14213d;
+  --ib-paper: #ffffff;
+  --ib-focus: #f5b700;
+}
+
+@theme inline {
+  --color-ib-blue: var(--ib-blue);
+  --color-ib-blue-dark: var(--ib-blue-dark);
+  --color-ib-blue-soft: var(--ib-blue-soft);
+  --color-ib-ink: var(--ib-ink);
+  --font-sans: var(--font-atkinson);
+}
+
+html {
+  font-size: 112.5%;
+}
+
+body {
+  background: var(--ib-paper);
+  color: var(--ib-ink);
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ib-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.prose-ib h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--ib-blue-dark);
+}
+.prose-ib p {
+  margin-bottom: 1rem;
+}
+.prose-ib ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+.prose-ib li {
+  margin-bottom: 0.5rem;
+}
+.prose-ib strong {
+  font-weight: 700;
+}
+.prose-ib a {
+  color: var(--ib-blue);
+  text-decoration: underline;
+}

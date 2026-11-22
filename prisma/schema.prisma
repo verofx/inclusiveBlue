@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  passwordHash String
+  // DOCENTE | ESTUDIANTE | FAMILIA | VALIDADOR
+  role         String
+  profession   String?
+  license      String?
+  createdAt    DateTime      @default(now())
+  validations  Validation[]
+  certificates Certificate[]
+}
+
+model Validation {
+  id          String   @id @default(cuid())
+  capsuleSlug String
+  contentHash String
+  // APROBADA | CAMBIOS
+  status      String
+  comment     String?
+  validatorId String
+  validator   User     @relation(fields: [validatorId], references: [id])
+  createdAt   DateTime @default(now())
+
+  @@index([capsuleSlug, contentHash])
+}
+
+model Certificate {
+  id            String   @id @default(cuid())
+  code          String   @unique
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  capsuleSlug   String
+  capsuleTitle  String
+  audience      String
+  contentHash   String
+  // JSON: [{ name, profession, license }]
+  validatorsJson String
+  issuedAt      DateTime @default(now())
+
+  @@unique([userId, capsuleSlug, audience])
+}
