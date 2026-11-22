@@ -16,6 +16,7 @@ export async function Header() {
         </Link>
         <nav aria-label="Principal" className="flex flex-wrap items-center gap-x-4 gap-y-2 flex-1">
           <Link href="/capsulas" className={linkClass}>Cápsulas</Link>
+          <Link href="/escuelas" className={linkClass}>Escuelas</Link>
           <Link href="/verificar" className={linkClass}>Verificar certificado</Link>
           {user?.role === "VALIDADOR" && (
             <Link href="/validar" className={linkClass}>Validar</Link>

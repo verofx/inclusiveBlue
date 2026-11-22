@@ -43,6 +43,10 @@ export default function Home() {
           <li>Cápsulas cortas que se pueden ver desde el celular y en pocos minutos.</li>
           <li>Contenido revisado por profesionales de la provincia.</li>
           <li>Certificados verificables para docentes y escuelas comprometidas con la inclusión.</li>
+         <li>
+           Cada cápsula completada suma puntaje y créditos para la escuela.{" "}
+           <Link href="/escuelas" className="underline font-bold">Ver escuelas</Link>
+         </li>
         </ul>
       </section>
     </div>

@@ -9,9 +9,10 @@
 - **Cápsulas** en Markdown con un recorrido por rol (docente, estudiante, familia) y una versión de lectura fácil. La primera: *¿Qué es el TEA?*
 - **Validación profesional:** cada versión del contenido necesita la aprobación de un profesional validador antes de publicarse. Si el contenido cambia, vuelve a revisión.
 - **Certificados:** al responder bien las preguntas de la cápsula se emite un certificado en PDF con QR y una página pública de verificación (`/verificar/<código>`).
+- **Puntaje por escuela:** cada persona elige su escuela al registrarse. Cada certificado suma 10 puntos a su escuela y cada 10 puntos dan 1 crédito InclusiveBlue (`/escuelas`).
 - **Accesible:** HTML semántico, navegación por teclado, foco visible, fuente Atkinson Hyperlegible, respeta `prefers-reduced-motion`.
 
-Web3 (NFT del certificado) queda como módulo opcional para más adelante: el certificado ya guarda el hash de la versión del contenido para poder anclarlo on-chain.
+Web3 queda como módulo opcional para más adelante: registrar en blockchain el NFT del certificado y los créditos de cada escuela, para que sean públicos, verificables y canjeables. El certificado ya guarda el hash de la versión del contenido para poder anclarlo on-chain.
 
 ## Desarrollo
 

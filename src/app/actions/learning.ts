@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { getCapsule } from "@/lib/capsules";
 import { newCertificateCode } from "@/lib/certificates";
 import { isAudience } from "@/lib/roles";
+import { POINTS_PER_CERTIFICATE } from "@/lib/scoring";
 import { getCurrentUser } from "@/lib/session";
 import { getValidationState } from "@/lib/validation";
 
@@ -47,11 +48,14 @@ export async function submitQuiz(_: QuizState, formData: FormData): Promise<Quiz
         capsuleTitle: capsule.title,
         audience,
         contentHash: capsule.contentHash,
+        schoolId: (await db.user.findUnique({ where: { id: user.id }, select: { schoolId: true } }))?.schoolId ?? null,
+        points: POINTS_PER_CERTIFICATE,
         validatorsJson: JSON.stringify(
           validation.approvals.map(({ name, profession, license }) => ({ name, profession, license })),
         ),
       },
     }));
   revalidatePath("/mis-certificados");
+  revalidatePath("/escuelas");
   redirect(`/verificar/${certificate.code}?nuevo=1`);
 }

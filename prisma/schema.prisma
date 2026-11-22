@@ -16,6 +16,8 @@ model User {
   role         String
   profession   String?
   license      String?
+  schoolId     String?
+  school       School?       @relation(fields: [schoolId], references: [id])
   createdAt    DateTime      @default(now())
   validations  Validation[]
   certificates Certificate[]
@@ -44,9 +46,21 @@ model Certificate {
   capsuleTitle  String
   audience      String
   contentHash   String
+  schoolId      String?
+  school        School?  @relation(fields: [schoolId], references: [id])
+  points        Int      @default(0)
   // JSON: [{ name, profession, license }]
   validatorsJson String
   issuedAt      DateTime @default(now())
 
   @@unique([userId, capsuleSlug, audience])
+}
+
+model School {
+  id           String        @id @default(cuid())
+  name         String
+  locality     String
+  region       String
+  users        User[]
+  certificates Certificate[]
 }

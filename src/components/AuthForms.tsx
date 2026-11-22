@@ -38,7 +38,9 @@ export function LoginForm({ next }: { next?: string }) {
   );
 }
 
-export function RegisterForm({ next }: { next?: string }) {
+type SchoolOption = { id: string; name: string; locality: string };
+
+export function RegisterForm({ next, schools }: { next?: string; schools: SchoolOption[] }) {
   const [state, action, pending] = useActionState(register, undefined);
   return (
     <form action={action} className="space-y-5 max-w-md">
@@ -66,6 +68,18 @@ export function RegisterForm({ next }: { next?: string }) {
           </label>
         ))}
       </fieldset>
+      <div className="space-y-1">
+        <label htmlFor="f-schoolId" className="block font-bold">Escuela</label>
+        <p id="f-schoolId-hint" className="text-sm text-slate-700">
+          Cada cápsula que completes suma puntos para tu escuela.
+        </p>
+        <select id="f-schoolId" name="schoolId" required defaultValue="" aria-describedby="f-schoolId-hint" className={inputClass}>
+          <option value="" disabled>Elegí tu escuela</option>
+          {schools.map((s) => (
+            <option key={s.id} value={s.id}>{s.name} ({s.locality})</option>
+          ))}
+        </select>
+      </div>
       <button type="submit" className={buttonClass} disabled={pending}>
         {pending ? "Creando cuenta…" : "Crear cuenta"}
       </button>

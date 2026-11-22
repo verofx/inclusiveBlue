@@ -13,6 +13,7 @@ const registerSchema = z.object({
   email: z.string().trim().toLowerCase().email("Escribí un email válido."),
   password: z.string().min(8, "La contraseña tiene que tener al menos 8 caracteres."),
   role: z.enum(["DOCENTE", "ESTUDIANTE", "FAMILIA"], { message: "Elegí cómo participás." }),
+  schoolId: z.string().min(1, "Elegí tu escuela."),
 });
 
 function safeNext(value: FormDataEntryValue | null) {
@@ -23,12 +24,13 @@ function safeNext(value: FormDataEntryValue | null) {
 export async function register(_: FormState, formData: FormData): Promise<FormState> {
   const parsed = registerSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return { error: parsed.error.issues[0].message };
-  const { name, email, password, role } = parsed.data;
+  const { name, email, password, role, schoolId } = parsed.data;
+  if (!(await db.school.findUnique({ where: { id: schoolId } }))) return { error: "Elegí tu escuela." };
   if (await db.user.findUnique({ where: { email } })) {
     return { error: "Ya existe una cuenta con ese email. Probá ingresar." };
   }
   const user = await db.user.create({
-    data: { name, email, role, passwordHash: await bcrypt.hash(password, 10) },
+    data: { name, email, role, schoolId, passwordHash: await bcrypt.hash(password, 10) },
   });
   await createSession(user.id);
   redirect(safeNext(formData.get("next")));
