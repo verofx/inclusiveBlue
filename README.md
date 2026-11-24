@@ -16,6 +16,7 @@ Equipo: Rocío Astudillo, Analía Aparicio y Verónica Torres.
 - **Validación profesional:** cada versión del contenido necesita la aprobación de un profesional validador antes de publicarse. Si el contenido cambia, vuelve a revisión.
 - **Certificados:** al responder bien las preguntas de la cápsula se emite un certificado en PDF con QR y una página pública de verificación (`/verificar/<código>`).
 - **Puntaje por escuela:** cada persona elige su escuela al registrarse. Cada certificado suma 10 puntos a su escuela y cada 10 puntos dan 1 crédito InclusiveBlue (`/escuelas`).
+- **Recorrido para peques:** para chicos y chicas que todavía no leen: video narrado, tarjetas ilustradas con audio y un juego con dibujos (sin certificado, para hacer con una persona adulta).
 - **Accesible:** HTML semántico, navegación por teclado, foco visible, fuente Atkinson Hyperlegible, respeta `prefers-reduced-motion`.
 
 Web3 queda como módulo opcional para más adelante: registrar en blockchain el NFT del certificado y los créditos de cada escuela, para que sean públicos, verificables y canjeables. El certificado ya guarda el hash de la versión del contenido para poder anclarlo on-chain.
@@ -58,3 +59,7 @@ Ver `content/capsulas/que-es-el-tea/` como ejemplo.
 ## Pasar a Supabase / Postgres
 
 En `prisma/schema.prisma` cambiar `provider = "sqlite"` por `"postgresql"`, poner la connection string de Supabase en `DATABASE_URL` y correr `npm run db:setup`.
+
+## Créditos
+
+La narración del recorrido para peques se generó con [Piper](https://github.com/rhasspy/piper) y la voz `es_AR-daniela-high`, entrenada con el corpus de español argentino de [OpenSLR 61](https://www.openslr.org/61/) (CC BY-SA 4.0).

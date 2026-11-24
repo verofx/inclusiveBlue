@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Markdown } from "@/components/Markdown";
 import { ReviewForm } from "@/components/ReviewForm";
 import { ValidationBadge } from "@/components/ui";
+import { VisualPathReview } from "@/components/VisualPath";
 import { getCapsule } from "@/lib/capsules";
 import { AUDIENCES, AUDIENCE_LABEL } from "@/lib/roles";
 import { requireValidator } from "@/lib/session";
@@ -50,6 +51,7 @@ export default async function ReviewCapsulePage({ params }: { params: Promise<{ 
         {AUDIENCES.map((a) => (
           <div key={a} className="border-t border-slate-200 pt-4">
             <p className="text-lg font-bold">Recorrido para {AUDIENCE_LABEL[a].toLowerCase()}</p>
+            {capsule.visuals[a] && <VisualPathReview path={capsule.visuals[a]} />}
             <Markdown>{capsule.paths[a]}</Markdown>
           </div>
         ))}

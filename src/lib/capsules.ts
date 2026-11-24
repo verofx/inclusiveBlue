@@ -14,6 +14,27 @@ export type QuizQuestion = {
   explicacion: string;
 };
 
+export type VisualCard = { imagen: string; audio: string; alt: string; texto: string };
+
+export type VisualGame = {
+  preguntas: {
+    pregunta: string;
+    audio: string;
+    opciones: VisualCard[];
+    correcta: number;
+    bien: string;
+    audioBien: string;
+  }[];
+  otraVez: string;
+  audioOtraVez: string;
+};
+
+export type VisualPath = {
+  video?: { archivo: string; subtitulos?: string; poster?: string; titulo: string };
+  tarjetas: VisualCard[];
+  juego?: VisualGame;
+};
+
 export type Capsule = {
   slug: string;
   title: string;
@@ -23,12 +44,51 @@ export type Capsule = {
   easyRead: string[];
   intro: string;
   paths: Record<Audience, string>;
+  visuals: Partial<Record<Audience, VisualPath>>;
   quiz: QuizQuestion[];
   contentHash: string;
 };
 
 async function readFile(file: string) {
   return fs.readFile(file, "utf8");
+}
+
+const PUBLIC = path.join(process.cwd(), "public");
+
+function visualAssets(v: VisualPath) {
+  const files = v.tarjetas.flatMap((t) => [t.imagen, t.audio]);
+  if (v.video) files.push(...[v.video.archivo, v.video.subtitulos, v.video.poster].filter((f): f is string => !!f));
+  if (v.juego) {
+    files.push(v.juego.audioOtraVez);
+    for (const q of v.juego.preguntas) {
+      files.push(q.audio, q.audioBien, ...q.opciones.flatMap((o) => [o.imagen, o.audio]));
+    }
+  }
+  return files;
+}
+
+function resolveVisual(v: VisualPath, base: string): VisualPath {
+  const url = (file: string) => `${base}/${file}`;
+  const card = (t: VisualCard) => ({ ...t, imagen: url(t.imagen), audio: url(t.audio) });
+  return {
+    video: v.video && {
+      ...v.video,
+      archivo: url(v.video.archivo),
+      subtitulos: v.video.subtitulos && url(v.video.subtitulos),
+      poster: v.video.poster && url(v.video.poster),
+    },
+    tarjetas: v.tarjetas.map(card),
+    juego: v.juego && {
+      ...v.juego,
+      audioOtraVez: url(v.juego.audioOtraVez),
+      preguntas: v.juego.preguntas.map((q) => ({
+        ...q,
+        audio: url(q.audio),
+        audioBien: url(q.audioBien),
+        opciones: q.opciones.map(card),
+      })),
+    },
+  };
 }
 
 export async function listCapsuleSlugs() {
@@ -45,9 +105,20 @@ export async function getCapsule(slug: string): Promise<Capsule | null> {
       AUDIENCES.map((a) => readFile(path.join(dir, `${a}.md`))),
     );
     const { data, content } = matter(indexRaw);
+    const parsedPaths = pathRaws.map((raw) => matter(raw));
     const hash = createHash("sha256");
     hash.update(indexRaw);
     pathRaws.forEach((raw) => hash.update(raw));
+    const visuals: Partial<Record<Audience, VisualPath>> = {};
+    for (const [i, a] of AUDIENCES.entries()) {
+      const visual = parsedPaths[i].data as VisualPath;
+      if (!Array.isArray(visual.tarjetas)) continue;
+      const base = `/capsulas/${slug}/${a}`;
+      for (const file of visualAssets(visual)) {
+        hash.update(await fs.readFile(path.join(PUBLIC, base, file)));
+      }
+      visuals[a] = resolveVisual(visual, base);
+    }
     return {
       slug,
       title: String(data.titulo),
@@ -58,8 +129,9 @@ export async function getCapsule(slug: string): Promise<Capsule | null> {
       quiz: (data.quiz as QuizQuestion[]) ?? [],
       intro: content.trim(),
       paths: Object.fromEntries(
-        AUDIENCES.map((a, i) => [a, matter(pathRaws[i]).content.trim()]),
+        AUDIENCES.map((a, i) => [a, parsedPaths[i].content.trim()]),
       ) as Record<Audience, string>,
+      visuals,
       contentHash: hash.digest("hex").slice(0, 16),
     };
   } catch {

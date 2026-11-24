@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { getCapsule } from "@/lib/capsules";
 import { newCertificateCode } from "@/lib/certificates";
-import { isAudience } from "@/lib/roles";
+import { hasCertificate, isAudience } from "@/lib/roles";
 import { POINTS_PER_CERTIFICATE } from "@/lib/scoring";
 import { getCurrentUser } from "@/lib/session";
 import { getValidationState } from "@/lib/validation";
@@ -22,6 +22,7 @@ export async function submitQuiz(_: QuizState, formData: FormData): Promise<Quiz
   const audience = String(formData.get("audience"));
   const capsule = await getCapsule(slug);
   if (!capsule || !isAudience(audience)) return { status: "error", message: "Cápsula no encontrada." };
+  if (!hasCertificate(audience)) return { status: "error", message: "Este recorrido no emite certificado." };
   const validation = await getValidationState(capsule);
   if (!validation.approved) {
     return { status: "error", message: "Esta cápsula todavía no fue validada por profesionales." };

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Markdown } from "@/components/Markdown";
 import { Alert, ValidationBadge } from "@/components/ui";
 import { getCapsule } from "@/lib/capsules";
-import { AUDIENCES, AUDIENCE_LABEL, audienceForRole } from "@/lib/roles";
+import { AUDIENCES, AUDIENCE_HINT, AUDIENCE_LABEL, audienceForRole } from "@/lib/roles";
 import { getCurrentUser } from "@/lib/session";
 import { getValidationState } from "@/lib/validation";
 
@@ -59,7 +59,7 @@ export default async function CapsulePage({ params }: { params: Promise<{ slug: 
 
       <section aria-labelledby="recorridos" className="space-y-3 border-t-2 border-slate-200 pt-6">
         <h2 id="recorridos" className="text-2xl font-bold">Seguí con el recorrido para vos</h2>
-        <ul className="grid gap-3 sm:grid-cols-3">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {AUDIENCES.map((a) => (
             <li key={a}>
               <Link
@@ -69,6 +69,7 @@ export default async function CapsulePage({ params }: { params: Promise<{ slug: 
                 }`}
               >
                 Para {AUDIENCE_LABEL[a].toLowerCase()}
+                {AUDIENCE_HINT[a] && <span className="block text-sm font-normal">{AUDIENCE_HINT[a]}</span>}
                 {a === suggested && <span className="block text-sm font-normal">(tu recorrido)</span>}
               </Link>
             </li>
