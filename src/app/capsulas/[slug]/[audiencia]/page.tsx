@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import { Markdown } from "@/components/Markdown";
 import { QuizForm } from "@/components/QuizForm";
 import { Alert, ButtonLink } from "@/components/ui";
+import { VisualPath } from "@/components/VisualPath";
 import { getCapsule } from "@/lib/capsules";
 import { db } from "@/lib/db";
-import { AUDIENCE_LABEL, isAudience } from "@/lib/roles";
+import { AUDIENCE_LABEL, hasCertificate, isAudience } from "@/lib/roles";
 import { getCurrentUser } from "@/lib/session";
 import { getValidationState } from "@/lib/validation";
 
@@ -24,7 +25,8 @@ export default async function CapsulePathPage({ params }: { params: Params }) {
   if (!capsule || !isAudience(audiencia)) notFound();
   const state = await getValidationState(capsule);
   if (!state.approved && user?.role !== "VALIDADOR") notFound();
-  const certificate = user
+  const visual = capsule.visuals[audiencia];
+  const certificate = user && hasCertificate(audiencia)
     ? await db.certificate.findUnique({
         where: { userId_capsuleSlug_audience: { userId: user.id, capsuleSlug: slug, audience: audiencia } },
       })
@@ -39,8 +41,10 @@ export default async function CapsulePathPage({ params }: { params: Params }) {
       <h1 className="text-3xl font-bold">
         {capsule.title} <span className="block text-xl font-normal">Para {AUDIENCE_LABEL[audiencia].toLowerCase()}</span>
       </h1>
+      {visual && <VisualPath path={visual} />}
       <Markdown>{capsule.paths[audiencia]}</Markdown>
 
+      {hasCertificate(audiencia) && (
       <section aria-labelledby="quiz" className="space-y-4 border-t-2 border-slate-200 pt-6">
         <h2 id="quiz" className="text-2xl font-bold">Tu certificado</h2>
         {certificate ? (
@@ -64,6 +68,7 @@ export default async function CapsulePathPage({ params }: { params: Params }) {
           </>
         )}
       </section>
+      )}
     </article>
   );
 }

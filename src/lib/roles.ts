@@ -1,4 +1,4 @@
-export const AUDIENCES = ["docente", "estudiante", "familia"] as const;
+export const AUDIENCES = ["docente", "estudiante", "familia", "peques"] as const;
 export type Audience = (typeof AUDIENCES)[number];
 
 export const ROLES = ["DOCENTE", "ESTUDIANTE", "FAMILIA", "VALIDADOR"] as const;
@@ -8,7 +8,16 @@ export const AUDIENCE_LABEL: Record<Audience, string> = {
   docente: "Docentes",
   estudiante: "Estudiantes",
   familia: "Familias",
+  peques: "Peques",
 };
+
+export const AUDIENCE_HINT: Partial<Record<Audience, string>> = {
+  peques: "Para quienes todavía no leen",
+};
+
+export function hasCertificate(audience: Audience) {
+  return audience !== "peques";
+}
 
 export const ROLE_LABEL: Record<Role, string> = {
   DOCENTE: "Docente",
