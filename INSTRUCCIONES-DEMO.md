@@ -28,15 +28,17 @@ Si bajaste el ZIP, descomprimilo y, en la terminal, entrá a la carpeta con `cd 
 
 ## 3. Preparar la demo (solo la primera vez)
 
+Primero copiá el archivo de configuración:
+
+- Mac / Linux: `cp .env.example .env`
+- Windows: `copy .env.example .env`
+
+Después instalá las dependencias y creá la base de datos:
+
 ```bash
 npm install
 npm run db:setup
 ```
-
-Antes de esos comandos, copiá el archivo de configuración:
-
-- Mac / Linux: `cp .env.example .env`
-- Windows: `copy .env.example .env`
 
 `npm run db:setup` crea la base de datos local y carga los usuarios y las escuelas de prueba.
 
