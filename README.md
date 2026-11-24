@@ -1,5 +1,5 @@
 # InclusiveBlue 💙  
-**Educación inclusiva real, con tecnología blockchain.**
+**Educación inclusiva real, con tecnología.**
 
 ## 🧩 Problemática
 Las escuelas llamadas "inclusivas" no brindan formación sobre discapacidad a quienes conviven con estudiantes neurodivergentes. Esto provoca discriminación, exclusión silenciosa y desconocimiento en docentes, estudiantes y familias.
