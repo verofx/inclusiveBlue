@@ -2,7 +2,13 @@
 
 **Educación inclusiva real.** Cápsulas breves sobre inclusión escolar para docentes, estudiantes y familias, validadas por profesionales, con certificado verificable.
 
-> La propuesta original (Hackathon Polkadot x NerdConf 2025) está en [`docs/PITCH.md`](docs/PITCH.md) y [`docs/InclusiveBlue-TecnologiaWeb3.pdf`](docs/InclusiveBlue-TecnologiaWeb3.pdf).
+- **Presentación del proyecto (Jujuy):** [`docs/InclusiveBlue-Presentacion.pdf`](docs/InclusiveBlue-Presentacion.pdf)
+- **Video de la demo:** [`docs/InclusiveBlue-Demo.mp4`](docs/InclusiveBlue-Demo.mp4)
+- **Cómo correr la demo paso a paso:** [`INSTRUCCIONES-DEMO.md`](INSTRUCCIONES-DEMO.md)
+
+Equipo: Rocío Astudillo, Analía Aparicio y Verónica Torres.
+
+> La propuesta original (Hackathon Polkadot x NerdConf 2025) está en [`docs/PITCH.md`](docs/PITCH.md).
 
 ## Qué hace la v1
 
