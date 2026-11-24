@@ -20,6 +20,10 @@ Equipo: Rocío Astudillo, Analía Aparicio y Verónica Torres.
 
 Web3 queda como módulo opcional para más adelante: registrar en blockchain el NFT del certificado y los créditos de cada escuela, para que sean públicos, verificables y canjeables. El certificado ya guarda el hash de la versión del contenido para poder anclarlo on-chain.
 
+## Estado actual
+
+🧪 Proyecto en fase de demo. Buscamos que el NOA sea un punto de innovación educativa (a futuro, también con uso de blockchain).
+
 ## Desarrollo
 
 Requiere Node.js 20+.
