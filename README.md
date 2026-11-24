@@ -8,30 +8,22 @@ Las escuelas llamadas "inclusivas" no brindan formación sobre discapacidad a qu
 InclusiveBlue es una plataforma educativa descentralizada que ofrece cápsulas breves de formación sobre inclusión escolar. Cada contenido es validado por profesionales y registrado en blockchain. Los usuarios reciben NFT como prueba de aprendizaje.
 
 ## 🚀 MVP propuesto
-- Acceso Web3 a cápsulas educativas (ej: autismo, TDAH, lenguaje respetuoso).
-- Validación profesional registrada en la blockchain.
-- Emisión de NFTs con metadata del progreso del usuario.
+- Acceso a cápsulas educativas (ej: autismo, TDAH, lenguaje respetuoso).
+- Validación profesional certificada (registrada en la blockchain a futuro).
+- Otorgamiento de puntos a cada institución que vaya completando las cápsulas (Emisión de NFTs con metadata del progreso del usuario a futuro).
 - Alianzas con escuelas piloto y comunidad educativa.
 
-## 🛠️ Tecnología Polkadot utilizada
-- **Moonbeam**: Smart contracts y lógica de progresos/NFT.
-- **Crust Network / IPFS**: Almacenamiento descentralizado de contenido.
-- **Unique Network**: Certificados NFT educativos.
-- **Substrate**: Posible módulo de reputación o red de validadores.
-- **Polkadot.js**: Frontend Web3.
-
 ## 🎯 Objetivo general
-Formar a toda la comunidad escolar en temas de inclusión, con contenidos confiables, accesibles y validados, usando tecnología blockchain.
+Formar a toda la comunidad escolar en temas de inclusión, con contenidos confiables, accesibles y validados por profesionales.
 
 ## 🌍 Impacto
 - Docentes, estudiantes y familias mejor preparados.
 - Reputación real de escuelas comprometidas.
 - Contenido accesible y certificado.
-- Salta como punto de innovación educativa con blockchain.
+- NOA como punto de innovación educativa. (a futuro innovación con uso de blockchain)
 
 ## 📌 Estado actual
-🧪 Proyecto en fase de ideación para la Hackathon de Polkadot x NerdConf 2025.  
-Buscamos colaboradores, validadores y comunidades interesadas.
+🧪 Proyecto en fase de demo
 
 ---
 
